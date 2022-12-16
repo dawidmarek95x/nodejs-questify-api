@@ -1,0 +1,2 @@
+PL: Tutaj będą pliki zawierajace oprogramowanie pośredniczące czyli funkcje mające dostęp do obiektu zapytania (req), obiektu odpowiedzi (res) lub kolejnej funkcji oprogramowania pośredniczącego w cyklu "zapytanie-odpowiedź" dla aplikacji.
+ENG: Here will be files containing middleware, i.e. functions that have access to the query object (req), the response object (res) or another middleware function in the "query-response" cycle for the application.

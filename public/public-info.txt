@@ -1,0 +1,2 @@
+PL: Tutaj bedą pliki statyczne (jeżeli w ogole będą potrzebne).
+ENG: Static files will be here (if needed at all).

@@ -1,0 +1,2 @@
+PL: Tutaj bedą pliki pomocnicze np. funkcje, które bedą wielokrotnie wykorzystane w innych plikach.
+ENG: Here will be auxiliary files, e.g. functions that will be used many times in other files.

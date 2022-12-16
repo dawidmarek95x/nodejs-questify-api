@@ -1,0 +1,22 @@
+== PL ==
+Folder zawierający pliki z metodami (funkcjami) asynchronicznymi do współpracy z bazą danych.
+
+Przykład: Tworzymy plik card.js, który będzie zawierał import modelu-schematu Card oraz funkcje, które bezpośredniej wymiany danych z bazą.
+
+== ENG ===
+Folder containing files with asynchronous methods (functions) for cooperation with the database.
+
+Example: We create a card.js file that will contain the import of the Card model-schema and functions that directly exchange data with the database.
+
+--------------------------------------------------------------------------------------------
+
+const Card = require("../models/contact");
+
+const createCard = async (userId, body) => {
+  const card = await Card.findOne({ ...body, owner: userId });
+  if (card) {
+    return null;
+  }
+
+  return await Card.create({ ...body, owner: userId });
+};

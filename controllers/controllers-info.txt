@@ -1,0 +1,2 @@
+PL: Tutaj bedą pliki zawierające kontrolery czyli funkcje obsługujące logikę pracy aplikacji dla danych ścieżek np. plik cardCtrl.js, ktory będzie zawierał 5 metod (funkcji) obsługujących logikę dla tworzenia, edycji, usuwania, pobierania oraz zmiany statusu kart.
+ENG: Here will be files containing controllers, i.e. functions supporting the logic of the application's work for given paths, e.g. the cardCtrl.js file, which will contain 5 methods (functions) supporting the logic for creating, editing, deleting, downloading and changing the status of cards.
