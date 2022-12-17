@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const bcrypt = require("bcrypt");
 
 
 // Enums
@@ -19,22 +18,8 @@ const CardCategory = [
 
 // Schema
 
-const userSchema = new Schema({
-    email: {
-        type: String,
-        required: [true, 'Email is required'],
-        unique: true
-  }, 
-    password: {
-        type: String,
-        required: [true, 'Password is required']
-    },
-    token: {
-        type: String,
-        default: null
-    },
-  cards: [
-    {
+const cardSchema = new Schema(
+  {
           title: {
             type: String,
             min: 2,
@@ -65,22 +50,21 @@ const userSchema = new Schema({
               type: String,
               enum: CardType,
               default: 'Task'
-        }
-    },
-  ],
-}, {
+          },
+          owner: {
+              type: Schema.Types.ObjectId,
+              ref: "users",
+              required: true,
+          },
+  },
+  {
     versionKey: false,
     timestamps: true
-});
+  }
+);
 
-userSchema.methods.setPassword = function(password) {
-  this.password = bcrypt.hashSync(password, bcrypt.genSaltSync(6));
-};
 
-userSchema.methods.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.password);
-};
 
-const User = mongoose.model("Users", userSchema);
+const Card = mongoose.model("cards", cardSchema);
 
-module.exports = User;
+module.exports = Card;
