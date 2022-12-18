@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 const bCrypt = require("bcrypt");
 
-const user = new Schema(
+const userSchema = new Schema(
 	{
 		password: {
 			type: String,
@@ -20,15 +20,16 @@ const user = new Schema(
 	},
 	{ versionKey: false, timestamps: true, strict: "throw" }
 );
+const SALT_ROUNDS = 12;
 
-user.methods.setPassword = function (password) {
-	this.password = bCrypt.hashSync(password, bCrypt.genSaltSync(6));
+userSchema.methods.setPassword = async function (password) {
+	this.password = await bCrypt.hash(password, bCrypt.genSaltSync(SALT_ROUNDS));
 };
 
-user.methods.validatePassword = function (password) {
-	return bCrypt.compareSync(password, this.password);
+userSchema.methods.validatePassword = async function (password) {
+	return bCrypt.compare(password, this.password);
 };
 
-const User = model("user", user);
+const User = model("user", userSchema);
 
 module.exports = User;

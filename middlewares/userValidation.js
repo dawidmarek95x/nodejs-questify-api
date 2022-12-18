@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const userSchema = Joi.object({
+const registrationAndLoginSchema = Joi.object({
 	email: Joi.string()
 	  .trim()
 	  .email({
@@ -20,18 +20,18 @@ const validation = (schema, req, res, next) => {
 	const { error } = schema.validate(req.body);
 	if (error) {
 	  const [{ message }] = error.details;
-	  return res.json({
+	  return res.status(400).json({
 		status: "failure",
 		code: 400,
-		message: `Field ${message.replace(/"/g, "")}`,
+		message: message.replace(/"/g, ""),
 	});
 	}
 	next();
   };
 
-const registerValidation = (req, res, next) =>
-  	validation(userSchema, req, res, next);
+const validateUser = (req, res, next) =>
+  	validation(registrationAndLoginSchema, req, res, next);
 
 module.exports = {
-	registerValidation
+	validateUser
 };
