@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { Schema, model } = mongoose;
 
 
 // Enums
@@ -16,25 +16,28 @@ const CardCategory = [
 "Work"
 ]
 
-// Schema
+// Card Schema
 
 const cardSchema = new Schema(
   {
           title: {
             type: String,
             min: 2,
-            max: 100
+            max: 100,
+            required: [true, "Set title for card"]
           },
           difficulty: {
               type: String,
               enum: CardDifficulty,
               default: 'Normal'
-      },
+          },
           date: {
-              type: String
+              type: String,
+              required: [true, "Set date for card"]
           },
           time: {
-              type: String
+              type: String,
+              required: [true, "Set time for card"]
           },
           status: {
               type: String,
@@ -53,7 +56,7 @@ const cardSchema = new Schema(
           },
           owner: {
               type: Schema.Types.ObjectId,
-              ref: "users",
+              ref: "user",
               required: true,
           },
   },
@@ -65,6 +68,6 @@ const cardSchema = new Schema(
 
 
 
-const Card = mongoose.model("cards", cardSchema);
+const Card = model("cards", cardSchema);
 
 module.exports = Card;
