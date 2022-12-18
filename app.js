@@ -2,7 +2,7 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
-// require("./config/passport"); // To odkomentować jak będzie skonfigurowany passport
+require("./config/passport");
 
 const indexRouter = require("./routes/index");
 
