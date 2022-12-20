@@ -1,2 +1,0 @@
-PL: Tutaj będą pliki konfiguracyjne np. passport.js dla uwierzytelniania.
-ENG: Here will be configuration files e.g. passport.js for authentication.

@@ -1,2 +1,0 @@
-PL: Tutaj będą pliki dla tras.
-EN: Here will be files for routes.

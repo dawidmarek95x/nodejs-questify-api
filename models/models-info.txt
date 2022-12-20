@@ -1,2 +1,0 @@
-PL: Folder zawierający pliki z modelami-schematami naszych kolekcji, ktore będą znajdować się w bazie danych tj. auth i card.
-EN: Folder containing files with models-schemas of our collections, which will be in the database, i.e. auth and card.
