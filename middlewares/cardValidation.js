@@ -19,8 +19,10 @@ const validation = (schema, req, res, next) => {
   }
   next();
 };
-const validateCreationOrEditing = (req, res, next) => {
-  validation(schemaCreationOrEditing, req, res, next);
-};
 
-module.exports = { validateCreationOrEditing };
+const validateCreationOrEditing = (req, res, next) =>
+  validation(schemaCreationOrEditing, req, res, next);
+
+module.exports = {
+  validateCreationOrEditing,
+};

@@ -4,9 +4,7 @@ const {
   updateUserToken,
 } = require("../services/users");
 
-const {
-  getCardsByOwner
-} = require("../services/card");
+const { getCardsByOwner } = require("../services/card");
 
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -17,22 +15,20 @@ const registerUser = async (req, res, next) => {
   try {
     const { email } = req.body;
     const user = await findUserByEmail(email);
+
     if (user) {
       return res.status(409).json({
-        status: "conflict",
+        status: "Conflict",
         code: 409,
         message: "Provided email already exists",
       });
     }
+
     const newUser = await createNewUser(req.body);
+
     res.status(201).json({
-      status: "created",
-      code: 201,
-      message: "Registration successful",
-      user: {
-        email: newUser.email,
-        id: newUser.id,
-      },
+      email: newUser.email,
+      id: newUser.id,
     });
   } catch (error) {
     next(error);
@@ -41,9 +37,11 @@ const registerUser = async (req, res, next) => {
 
 const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
+
   try {
     const user = await findUserByEmail(email);
     const isPasswordCorrect = await user?.validatePassword(password);
+
     if (!user || !isPasswordCorrect) {
       return res.status(401).json({
         status: "Unauthorized",
@@ -51,6 +49,7 @@ const loginUser = async (req, res, next) => {
         message: "Email doesn't exist / Password is wrong",
       });
     }
+
     const { _id: id } = user;
     const payload = {
       id,
@@ -59,14 +58,11 @@ const loginUser = async (req, res, next) => {
 
     const token = jwt.sign(payload, SECRET, { expiresIn: "1h" });
     await updateUserToken(id, token);
-    
+
     const cards = await getCardsByOwner(id);
 
     res.status(200).json({
-      status: "ok",
-      code: 200,
       accessToken: token,
-      // refreshToken, <-- uncomment if refreshToken func will be added
       userData: {
         email,
         id,
@@ -80,6 +76,7 @@ const loginUser = async (req, res, next) => {
 
 const logoutUser = async (req, res, next) => {
   const { _id: id } = req.user;
+
   try {
     await updateUserToken(id);
     res.status(204).end();

@@ -14,7 +14,7 @@ const updateUserToken = async (id, token = null) =>
   await User.findByIdAndUpdate(id, { token });
 
 module.exports = {
+  findUserByEmail,
   createNewUser,
   updateUserToken,
-  findUserByEmail,
 };

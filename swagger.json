@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "version": "0.1.0",
+    "version": "1.0.0",
     "title": "Questify API docs",
     "description": "This is the API documentation for the 'Questify' project. [Backend GitHub repository](https://github.com/dawidmarek95x/nodejs-questify-api)",
     "license": {
@@ -242,7 +242,7 @@
         "security": [{ "Bearer": [] }],
         "parameters": [],
         "responses": {
-          "201": {
+          "200": {
             "description": "Successful operation",
             "content": {
               "application/json": {
@@ -705,6 +705,11 @@
                   "type": "string",
                   "description": "Card's status",
                   "enum": ["Incomplete", "Complete"]
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Card's category",
+                  "enum": ["Stuff", "Family", "Health", "Learning", "Leisure", "Work"]
                 },
                 "type": {
                   "type": "string",

@@ -56,10 +56,7 @@ const cardSchema = new Schema(
       required: true,
     },
   },
-  {
-    versionKey: false,
-    timestamps: true,
-  }
+  { versionKey: false, strict: "throw" }
 );
 
 const Card = model("card", cardSchema);
