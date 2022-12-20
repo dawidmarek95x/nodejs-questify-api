@@ -60,7 +60,7 @@ const loginUser = async (req, res, next) => {
     const token = jwt.sign(payload, SECRET, { expiresIn: "1h" });
     await updateUserToken(id, token);
     
-    const cards = getCardsByOwner(id);
+    const cards = await getCardsByOwner(id);
 
     res.status(200).json({
       status: "ok",
