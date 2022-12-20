@@ -15,7 +15,7 @@
   },
   "consumes": ["application/json"],
   "produces": ["application/json"],
-  "servers": [{ "url": "https://questify-api.vercel.app/" }],
+  "servers": [{ "url": "https://questify-api.vercel.app" }],
   "tags": [
     {
       "name": "Auth",
