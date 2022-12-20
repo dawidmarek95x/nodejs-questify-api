@@ -4,6 +4,10 @@ const {
   updateUserToken,
 } = require("../services/users");
 
+const {
+  getCardsByOwner
+} = require("../services/card");
+
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
@@ -55,7 +59,9 @@ const loginUser = async (req, res, next) => {
 
     const token = jwt.sign(payload, SECRET, { expiresIn: "1h" });
     await updateUserToken(id, token);
-    // trzeba zadeklarować zmienną pobierającą z kolekcji cards karty dla użytkownika
+    
+    const cards = getCardsByOwner(id);
+
     res.status(200).json({
       status: "ok",
       code: 200,
@@ -64,7 +70,7 @@ const loginUser = async (req, res, next) => {
       userData: {
         email,
         id,
-        // cards, <-- uncomment if cards will be added
+        cards,
       },
     });
   } catch (error) {
