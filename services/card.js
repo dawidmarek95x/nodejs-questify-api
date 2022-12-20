@@ -1,29 +1,17 @@
 const Card = require("../models/cardSchema");
 
-const getCardsById = async (userId) => {
-    return await Card.find({ owner: userId })
-}
+const getCardsByOwner = async (userId) => await Card.find({ owner: userId });
 
-const createCard = async (userId, body) => {
-    return await Card.create({ ...body, owner: userId })
-}
+const createNewCard = async (userId, body) => await Card.create({ ...body, owner: userId })
 
-const deleteCardById = async (cardId) => {
-    return await Card.findOneAndDelete({ _id: cardId})
-}
+const deleteExistingCard = async (userId, cardId) => await Card.findOneAndDelete({ owner: userId, _id: cardId })
+     
+const editExistingCard = async (userId, cardId, body) => await Card.findByIdAndUpdate({ owner: userId, _id: cardId }, { $set: body }, { new: true, runValidators: true, strict: "throw" })
 
-const editCardById = async (cardId, body) => {
-    return await Card.findByIdAndUpdate({ _id: cardId }, body, { new: true })
-}
-
-const completeCard = async (cardId) => {
-    return await Card.findByIdAndUpdate({_id: cardId},{status: 'Complete'})
-}
 
 module.exports = {
-    getCardsById,
-    createCard,
-    deleteCardById,
-    editCardById,
-    completeCard
+    getCardsByOwner,
+    createNewCard,
+    deleteExistingCard,
+    editExistingCard,
 }

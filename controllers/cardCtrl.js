@@ -1,44 +1,44 @@
-const service = require("../services/card");
+const {
+    getCardsByOwner,
+    createNewCard,
+    deleteExistingCard,
+    editExistingCard,
+} = require("../services/card");
 
 const getAllUserCards = async (req, res, next) => {
     try {
-        const { id } = req.user
-        const userCards = await service.getCardsById(id)
-        res.status(201).json({
+        const { id: userId } = req.user;
+        const cards = await getCardsByOwner(userId)
+        res.status(200).json({
             status: "Successful operation",
-            code: 201,
-            cards: userCards
+            code: 200,
+            cards
         })
     } catch (error) {
 		next(error);
 	}
 }
 
-
-const addNewCard = async (req, res, next) => {
+const createCard = async (req, res, next) => {
 	try {
-		const { id } = req.user;
-	
-		const newCard = await service.createCard(id, req.body);
+		const { id: userId } = req.user;
+		const createdCard  = await createNewCard(userId, req.body);
 		res.status(201).json({
 			status: "Successful operation",
 			code: 201,
-			createdCard: newCard
+			createdCard
 		});
 	} catch (error) {
 		next(error);
 	}
 };
 
-const removeCard = async (req, res, next) => {
+const deleteCard = async (req, res, next) => {
 	try {
-		const { id } = req.params
-		const deleteCard = await service.deleteCardById(id);
-		res.status(204).json({
-			status: "Successful operation",
-			code: 204,
-			message: "Card removed"
-		})
+		const { id: userId } = req.user;
+		const { cardId  } = req.params
+		await deleteExistingCard(userId, cardId);
+		res.status(204).end();
 	} catch (error) {
 		next(error)
 	}
@@ -46,36 +46,39 @@ const removeCard = async (req, res, next) => {
 
 const editCard = async (req, res, next) => {
 	try {
-		const { id } = req.params;
+		const { id: userId } = req.user;
+		const { cardId } = req.params;
 		const body  = req.body;
-		const editCard = await service.editCardById(id, body);
+		const editedCard = await editExistingCard(userId, cardId, body);
 		res.status(200).json({
 			status: "Successful operation",
 			code: 200,
-			editedCard: editCard
+			editedCard
 		})
 	} catch (error) {
 		next(error)
 	}
 }
 
-const completeCard = async (req, res, next) => {
+const changeCardStatusToCompleted  = async (req, res, next) => {
 	try {
-		const { id } = req.params;
-		const completedCard = await service.completeCard(id);
+		const { id: userId } = req.user;
+		const { cardId } = req.params;
+		const editedCard  = await editExistingCard( userId, cardId, {status: "Complete"});
 		res.status(200).json({
 			status: "Successful operation",
 			code: 200,
-			editedCard: completedCard
+			editedCard
 		})
 	} catch (error) {
 		next(error)
 	}
 }
+
 module.exports = {
 	getAllUserCards,
-	addNewCard,
-	removeCard,
+	createCard,
+	deleteCard,
 	editCard,
-	completeCard
+	changeCardStatusToCompleted 
 };
