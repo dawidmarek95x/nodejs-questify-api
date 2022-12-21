@@ -1,10 +1,15 @@
 const express = require("express");
 const router = express.Router();
+const authenticateUser = require("../middlewares/authenticateUser");
+const { validateUser } = require("../middlewares/userValidation");
+const {
+  registerUser,
+  loginUser,
+  logoutUser,
+} = require("../controllers/authCtrl");
 
-// Przykład poprawnego routingu:
-// router.post("/register", validateRegistration, register);
-// gdzie:
-// validateRegistration - middleware w postaci metody (funkcji) dla walidacji formularza rejestracji
-// register - kontroler w postaci metody (funkcji) obsługującej żądane zapytanie
+router.post("/register", validateUser, registerUser);
+router.post("/login", validateUser, loginUser);
+router.post("/logout", authenticateUser, logoutUser);
 
 module.exports = router;
