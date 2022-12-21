@@ -1,11 +1,24 @@
 const express = require("express");
 const router = express.Router();
+const authenticateUser = require("../middlewares/authenticateUser");
+const { validateCreationOrEditing } = require("../middlewares/cardValidation");
 
-// Przykład poprawnego routingu:
-// router.post("/", authenticateUser, validateCreation, addCard);
-// gdzie:
-// authenticateUser - middleware w postaci metody (funkcji) sprawdzającej ważność tokena użytkownika
-// validateCreation - middleware w postaci metody (funkcji) dla walidacji danych podanych do utworzenia nowej karty
-// addCard - kontroler w postaci metody (funkcji) obsługującej żądane zapytanie
+const {
+  createCard,
+  editCard,
+  deleteCard,
+  getAllUserCards,
+  changeCardStatusToCompleted,
+} = require("../controllers/cardCtrl");
+
+router.post("/", authenticateUser, validateCreationOrEditing, createCard);
+router.patch("/:cardId", authenticateUser, validateCreationOrEditing, editCard);
+router.delete("/:cardId", authenticateUser, deleteCard);
+router.get("/", authenticateUser, getAllUserCards);
+router.patch(
+  "/complete/:cardId",
+  authenticateUser,
+  changeCardStatusToCompleted
+);
 
 module.exports = router;
