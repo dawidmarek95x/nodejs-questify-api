@@ -13,4 +13,5 @@ A project of a server containing user authentication and authorization, after wh
 Based on the REST API architecture, create a server that is the basic form of data exchange with the [Questify](https://final-project-questify.netlify.app/) application. The whole thing is to be done in MERN stack technologies, i.e. [Node.js](https://nodejs.org/en/), [Express.js](https://expressjs.com/) and the [MongoDB](https://www.mongodb.com/home) database on the backend and [React](https://reactjs.org/) on the frontend.
 
 #### Acceptance criteria:
+
 [Project acceptance criteria](https://github.com/dawidmarek95x/nodejs-questify-api/blob/main/criteria.md)

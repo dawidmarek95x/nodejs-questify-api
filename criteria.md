@@ -1,7 +1,5 @@
 # Project acceptance criteria
 
-### Project
-
 **«A1»** Customize the server by plugging in environment variables, adjusting CORS and morgan.
 
 **«A2»** Evaluate the structure, initialize and connect the database.
