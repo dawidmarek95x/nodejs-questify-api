@@ -56,7 +56,7 @@ const loginUser = async (req, res, next) => {
       email,
     };
 
-    const token = jwt.sign(payload, SECRET, { expiresIn: "1h" });
+    const token = jwt.sign(payload, SECRET, { expiresIn: "24h" });
     await updateUserToken(id, token);
 
     const cards = await getCardsByOwner(id);
