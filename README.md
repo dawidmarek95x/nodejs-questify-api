@@ -3,6 +3,8 @@
 ## General info
 A project of a server containing user authentication and authorization, after which the user has the ability to manage individual sets of task cards in the form of Quests and Challenges. The project is based on the REST API architecture, while the MongoDB database is used for data storage and editing.
 
+**API Documentation:** [Questify API](https://questify-api.onrender.com/)
+
 ## Technologies
 **Project was created with:**
 
